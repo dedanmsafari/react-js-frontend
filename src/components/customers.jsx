@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React  from 'react'
 const Customers = () => {
     return <h1>Customers</h1>;
 }
