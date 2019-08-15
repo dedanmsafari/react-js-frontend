@@ -4,13 +4,13 @@
 //We decided to create a pagination util component that we will use in our code for paging
 //in stateless functional components we never use  the this keyword.
 import React from 'react';
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';//validation.
 import _ from 'lodash';
 const Pagination = props => {
 
  const {itemsCount,onPageChange,currentPage, pageSize} = props;
-//console.log(currentPage);
- const pagesCount = Math.ceil(itemsCount / pageSize);//define the number of pages to its ceil to remove floats
+
+ const pagesCount = Math.ceil(itemsCount / pageSize);//define the number of pages to its upperbound to remove floats
  if (pagesCount === 1) return null;
  const pages = _.range(1, pagesCount + 1);//show  the range of all your pages.1...2...3..4
     return ( 
