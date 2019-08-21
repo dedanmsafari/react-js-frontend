@@ -6,8 +6,7 @@ const Likes = props => {
     
     return ( 
     
-    <i onClick ={props.onClick}className={classes} style={{cursor:"pointer"}} aria-hidden="true"></i>
-    
+    <i onClick ={props.onClick} className={classes} style={{cursor:"pointer"}} aria-hidden="true"></i>
     
      );
     }
