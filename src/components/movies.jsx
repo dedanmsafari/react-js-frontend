@@ -33,41 +33,32 @@ class Movies extends Component {
     this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
-getPagedData = () => {
+  getPagedData = () => {
+    const {
+      pageSize,
+      currentPage,
+      selectedGenre,
+      sortColumn,
+      movies: allMovies
+    } = this.state;
 
-  const {
-    pageSize,
-    currentPage,
-    selectedGenre,
-    sortColumn,
-    movies: allMovies
-  } = this.state;
+    const filtered =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter(m => m.genre._id === selectedGenre._id)
+        : allMovies;
+    const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
 
+    const movies = paginate(sorted, currentPage, pageSize);
 
-  const filtered =
-  selectedGenre && selectedGenre._id
-    ? allMovies.filter(m => m.genre._id === selectedGenre._id)
-    : allMovies;
-const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
-
-const movies = paginate(sorted, currentPage, pageSize);
-
-return {totalCount: filtered.length ,data: movies }
-};
-
+    return { totalCount: filtered.length, data: movies };
+  };
 
   render() {
     //renaming length to count.
     const { length: count } = this.state.movies;
-    const {
-      pageSize,
-      currentPage,
-      sortColumn,
-
-    } = this.state;
-    const {  totalCount, data:movies } = this.getPagedData();
+    const { pageSize, currentPage, sortColumn } = this.state;
+    const { totalCount, data: movies } = this.getPagedData();
     if (count === 0)
-   
       return (
         <p>
           {" "}
@@ -76,10 +67,9 @@ return {totalCount: filtered.length ,data: movies }
         </p>
       );
 
-     return (
-       
-        <div className="row">
-        <div className="col-3">
+    return (
+      <div className="row">
+        <div className="col-2">
           <ListGroup
             items={this.state.genres}
             selectedItem={this.state.selectedGenre}
@@ -88,9 +78,10 @@ return {totalCount: filtered.length ,data: movies }
         </div>
 
         <div className="col">
+           className="btn btn-primary" <Link className="btn btn-primary"to ="/movies/new">New Movies</Link>
           <p>
-            There are <strong> {totalCount} </strong>movies
-            remaining.Please Pick One{" "}
+            There are <strong> {totalCount} </strong>movies remaining.Please
+            Pick One{" "}
           </p>
 
           <MoviesTable
@@ -111,7 +102,10 @@ return {totalCount: filtered.length ,data: movies }
       </div>
     );
   }
+ChangeDirection = () => {
 
+  window.location.hash("#/movies/new");
+}
   handleSort = sortColumn => {
     this.setState({ sortColumn });
   };
