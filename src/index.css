@@ -14,16 +14,26 @@ code {
     monospace;
 }
 
-.navbar{
-margin-bottom: 30px;
+.navbar {
+  margin-bottom: 30px;
 
 }
+
 .clickable {
-cursor:pointer;
+  cursor: pointer;
 
 }
-.Container{
+
+.Container {
 
   background-color: rgb(139, 155, 156);
 }
 
+.btn.btn-primary {
+  /* background-color: linear-gradient(to bottom right, rgb(29, 82, 25), rgb(0, 255, 170));  */
+  background-image: linear-gradient(to right, #314755 0%, #26a0da 51%, #314755 100%)
+}
+
+.btn.btn-primary:hover {
+  background-position: right center;
+}
